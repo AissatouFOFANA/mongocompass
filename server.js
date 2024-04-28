@@ -29,7 +29,7 @@ db.mongoose
   });
 
 app.use(logger("dev"));
-app.use("/movies", mv)
+app.use("/", mv)
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to top movies application." });
