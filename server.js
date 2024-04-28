@@ -8,6 +8,16 @@ const PORT = process.env.PORT || 4002;
 
 const db = require("./models");
 
+const bodyParser = require("body-parser");
+
+
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const mv = require("./routes/movies.routes");
+
 db.mongoose
   .connect(db.url)
   .then(() => {
@@ -19,10 +29,43 @@ db.mongoose
   });
 
 app.use(logger("dev"));
+app.use("/movies", mv)
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to glsi students application." });
+  res.json({ message: "Welcome to top movies application." });
 });
+
+/*
+app.post('/movies', async (req, res) => {
+    try {
+      const newMovie = new Movie(req.body);
+      const savedMovie = await newMovie.save();
+      res.status(201).json(savedMovie);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.put('/movies/:id', async (req, res) => {
+    try {
+      const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.json(updatedMovie);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.delete('/movies/:id', async (req, res) => {
+    try {
+      await Movie.findByIdAndDelete(req.params.id);
+      res.status(204).end();
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+*/
+
 
 app.listen(PORT, () => {
   console.log(`Backend express server is running on port ${PORT}.`);

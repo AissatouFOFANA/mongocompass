@@ -1,4 +1,3 @@
-
 module.exports = (app) => {
   const movies = require("../controllers/movies.controller.js");
   let router = require("express").Router();
@@ -18,7 +17,5 @@ module.exports = (app) => {
   // Supprimer un film par ID
   router.delete("/:id", movies.delete);
 
-  app.use("/api/movies", router);
+ // app.use("/api/movies", router);
 };
-
-
